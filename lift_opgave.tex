@@ -75,11 +75,6 @@ Jouw eerste opdracht is nu de voorbeelden in de Arduino IDE te bekijken en na te
 \texttt{DCMotor} kunnen defini\"eren en aansturen. Zorg er vooral voor dat je probeert de code te begrijpen en ze
 niet gewoon overtypt of kopieert.
 
-Probeer de motor een tijdje in de ene richting en een tijdje in de andere richting te laten draaien. Je zult zien dat
-de motor niet onmiddellijk van richting verandert, maar dat ze eerst stopt. Dit is ingebouwd in de Dwengo bibliotheek
-die we gebruiken in ons programma om te vermijden dat de motor snel stuk gaat. {\em Zorg er in deze fase voor dat de motor de
-lift nog niet verplaatst door het tandwiel van de katrolas een beetje te verplaatsen.}
-
 Denk ook eens na over de volgende vragen:
 
 \begin{enumerate}
@@ -87,9 +82,37 @@ Denk ook eens na over de volgende vragen:
 \item hoe laat je de motor in de andere richting draaien?
 \end{enumerate}
 
+Probeer de motor een tijdje in de ene richting en een tijdje in de andere richting te laten draaien. Je zult zien dat
+de motor niet onmiddellijk van richting verandert, maar dat ze eerst stopt. Dit is ingebouwd in de Dwengo bibliotheek
+die we gebruiken in ons programma om te vermijden dat de motor snel stuk gaat. {\em Zorg er in deze fase voor dat de motor de
+lift nog niet verplaatst door het tandwiel van de katrolas een beetje te verplaatsen.}
 
-\subsection{Bepalen van de beweging van de lift}
+\section{De lift bewegen met twee drukknoppen op de dwenguino}
 
-Er zijn verschillende manieren waarop dit kan gebeuren. Ee
+Nu we weten hoe we de motor kunnen bewegen in beide richtingen, is het tijd om de volgende stap te zetten. We zullen
+de lift laten bewegen door op een knop te drukken die aangeeft dat we omhoog willen en door op een knop te drukken
+die aangeeft dat we de lift omlaag willen verplaatsen.
+
+We hebben hiervoor enkele nieuwe functies en constanten nodig:
+
+\begin{itemize}
+\item \texttt{digitalRead()} leest de waarde uit van een drukknop,
+\item \texttt{delay()} pauzeert de uitvoering van het programma gedurende het opgegeven aantal milliseconden,
+\item de constanten die de knoppen defini\"eren: \texttt{SW\_E} (oost), \texttt{SW\_W} (west), \texttt{SW\_S} (zuid), \texttt{SW\_N} (noord) en \texttt{SW\_C} (centrum),
+\item de constante die aangeeft dat een knop is ingedrukt: \texttt{PRESSED},
+\item een statement dat overeenkomt met het {\em Als ... Dan} blok uit Scratch: \texttt{if (voorwaarde) \{ /* doe iets */\}}.
+\end{itemize}
+
+Definieer ook zelf een functie om de lift een stukje omhoog te laten gaan en een gelijkaardige functie om ze (evenveel)
+omlaag te laten gaan. Zorg er vervolgens voor dat je deze functie oproept op het ogenblik dat er op de knop wordt
+gedrukt.
+
+\textbf{Let op!} Om te vermijden dat het mogelijk is te snel te wisselen van richting door de knoppen afwisselend in te
+drukken, is het belangrijk dat de \texttt{loop()}-functie telkens wacht nadat een knop is ingedrukt. Daarvoor gebruik je
+de \texttt{delay()}-functie.
+
+\section{Bepalen van de beweging van de lift}
+
+Er zijn verschillende manieren waarop dit kan gebeuren.
 
 \end{document}
