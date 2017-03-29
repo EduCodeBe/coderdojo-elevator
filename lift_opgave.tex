@@ -1,0 +1,95 @@
+\documentclass{article}
+
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{color}
+
+\begin{document}
+
+\section{Introductie}
+
+We zullen in dit project een lift bouwen die we kunnen aansturen met behulp van een elektronica-bordje, in dit
+geval een {\em dwenguino}. Hiervoor hebben we de volgende componenten nodig:
+
+\begin{itemize}
+\item een dwenguino,
+\item een computer met daarop de Arduino IDE software,
+\item de dwengo-bibliotheken voor de Arduino IDE\footnote{\url{http://www.dwengo.org/install}}
+\item een liftkoker,
+\item een lift, die bij voorkeur niet kan ronddraaien terwijl ze verplaatst wordt,
+\item een motor die kan aangestuurd worden door de dwenguino
+\item kabels om de motor van stroom te voorzien
+\end{itemize}
+
+De liftkoker en de lift zijn reeds gebouwd voor gebruik in onze Dojo, maar als je zelf een koker wil bouwen, waarop
+we een van onze motoren kunnen plaatsen, dan mag dat natuurlijk ook.
+
+We hebben dit project opgesplitst in een aantal deeltaken, die normaal van makkelijk of vrij eenvoudig naar redelijk
+moeilijk en vrij complex evolueren. Op dit moment zijn nog niet al die taken volledig uitgewerkt :)
+
+
+\section{Aankoppelen van de dweguino aan de motor en de lift verplaatsen}
+
+In deze eerste taak zullen we ervoor zorgen dat we de eenvoudigweg op en neer kunnen verplaatsen over een zelfde
+afstand. Hiervoor hebben we een {\em sketch} nodig die we schrijven in een gewone tekstgebaseerde programmeertaal (dus
+niet in Scratch). We kunnen deze sketch schrijven in o.a. de Arduino IDE.
+
+Als je de IDE opent zie je onmiddellijk de standaard sketch:
+
+\begin{lstlisting}
+void setup() {
+  // put your setup code here, to run once:
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+
+}
+\end{lstlisting}
+
+De code die nodig is om alles in te stellen, plaatsen we typisch in \texttt{setup()}, de code die telkens weer moet worden
+uitgevoerd om bijvoorbeeld te reageren op gebeurtenissen zoals het indrukken van een knop, een sensor die iets opmerkt,
+\ldots, plaatsen we in \texttt{loop()}.
+
+Variabelen die we in meerdere functies zullen gebruiken, plaatsen we buiten elke functie en zijn dan zogenaamde globale
+variabelen. Je kunt dit een beetje vergelijken met een variabele in Scratch die bruikbaar is door alle sprites.
+
+In onze eerste taak hebben we zo'n variabele nodig om de motor te kunnen gebruiken. Omdat de computer moet weten wat we
+bedoelen met onze variabele, geven we ze ook een {\em type}. Dit bepaalt o.a. wat we verder kunnen aanvangen met onze
+variabele. In ons geval heeft de variabele het type \texttt{DCMotor}. Opdat de computer zou weten wat dit precies is,
+moeten we in ons programma ook vertellen waar de definitie van die \texttt{DCMotor} staat. Dit doen we door stukjes code
+in te laden in onze broncode. Om te vermijden dat we alles meermaals moeten typen bestaat hier een handig statement voor
+in C of C++, namelijk:
+
+\begin{lstlisting}
+#include <Dwenguino.h>
+#include <DwenguinoMotor.h> // the motor library
+\end{lstlisting}
+
+Typisch plaatsen we deze statements bovenaan ons programma zodat alle code die volgt tevens de definities kan gebruiken
+die we hier in ons programma hebben geladen.
+
+Jouw eerste opdracht is nu de voorbeelden in de Arduino IDE te bekijken en na te gaan op welke manier we een
+\texttt{DCMotor} kunnen defini\"eren en aansturen. Zorg er vooral voor dat je probeert de code te begrijpen en ze
+niet gewoon overtypt of kopieert.
+
+Probeer de motor een tijdje in de ene richting en een tijdje in de andere richting te laten draaien. Je zult zien dat
+de motor niet onmiddellijk van richting verandert, maar dat ze eerst stopt. Dit is ingebouwd in de Dwengo bibliotheek
+die we gebruiken in ons programma om te vermijden dat de motor snel stuk gaat. {\em Zorg er in deze fase voor dat de motor de
+lift nog niet verplaatst door het tandwiel van de katrolas een beetje te verplaatsen.}
+
+Denk ook eens na over de volgende vragen:
+
+\begin{enumerate}
+\item hoe snel kan de motor draaien?
+\item hoe laat je de motor in de andere richting draaien?
+\end{enumerate}
+
+
+\subsection{Bepalen van de beweging van de lift}
+
+Er zijn verschillende manieren waarop dit kan gebeuren. Ee
+
+\end{document}
