@@ -1,8 +1,12 @@
-\documentclass{article}
+\documentclass[a4paper, 10pt]{article}
+
+\usepackage[a4paper,left=3cm,right=2cm,top=2.5cm,bottom=2.5cm]{geometry}
+
 
 \usepackage{hyperref}
 \usepackage{graphicx}
 
+% defaults voor code
 \usepackage{listings}
 \usepackage{color}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
@@ -14,13 +18,24 @@
     numbersep=10pt,
 }
 
+% Een deftig font dat geen zeer doet aan de oogjes
 \usepackage{fontspec}
 \setmainfont{Helvetica Neue Light}[
   ItalicFont=Helvetica Neue Light Italic,
 ]
 
 
+\usepackage[parfill]{parskip}
+
+% We spreken Nederlands.
+\usepackage[dutch]{babel}
+
+
 \begin{document}
+
+\title{We bouwen een lift met Dwengo}
+\author{CoderDojo's Bredene - Oostende}
+\maketitle
 
 \section{Introductie}
 
