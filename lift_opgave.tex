@@ -2,8 +2,23 @@
 
 \usepackage{hyperref}
 \usepackage{graphicx}
+
 \usepackage{listings}
 \usepackage{color}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\lstset{
+    numbers=left,
+    numberstyle=\small\color{mygray},
+    keywordstyle=\color{blue},
+    stringstyle=\color{green},
+    numbersep=10pt,
+}
+
+\usepackage{fontspec}
+\setmainfont{Helvetica Neue Light}[
+  ItalicFont=Helvetica Neue Light Italic,
+]
+
 
 \begin{document}
 
@@ -37,7 +52,7 @@ niet in Scratch). We kunnen deze sketch schrijven in o.a. de Arduino IDE.
 
 Als je de IDE opent zie je onmiddellijk de standaard sketch:
 
-\begin{lstlisting}
+\begin{lstlisting}[language=C++]
 void setup() {
   // put your setup code here, to run once:
 
@@ -113,6 +128,18 @@ de \texttt{delay()}-functie.
 
 \section{Bepalen van de beweging van de lift}
 
-Er zijn verschillende manieren waarop dit kan gebeuren.
+Voor we de lift per verdieping kunnen verplaatsen, moeten we eerst achterhalen hoe ver de lift zich verplaatst voor
+een gegeven motorsnelheid en de tijd die we de motor laten draaien. Er zijn verschillende manieren om dit te bepalen,
+en in dit onderdeel zullen we experimenteel bepalen hoe ver de lift kan bewegen voor een aantal snelheden. We laten
+de motor telkens 1s draaien. Let op! Zodra je merkt dat de verplaatsing te groot wordt en de lift dus te ver omhoog
+komt, kun je de snelheid niet meer verhogen.
+
+Om de gegevens netjes bij te houden open je best een spreadsheet-applicatie zoals Excel, Numbers (op de Mac), of Google
+docs als je een netwerkverbinding hebt. We hebben twee kolommen nodig: eentje voor de snelheid en eentje voor de afgelegde
+afstand.
+
+Welke snelheden zou je kiezen als je zo snel mogelijk een idee wil hebben van het verband tussen de snelheid
+en de verplaatsing?
+
 
 \end{document}
