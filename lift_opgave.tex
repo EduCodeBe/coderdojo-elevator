@@ -1,6 +1,7 @@
 \documentclass[a4paper, 10pt]{article}
 
 \usepackage[a4paper,left=3cm,right=2cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{amsmath}
 
 
 \usepackage{hyperref}
@@ -44,7 +45,7 @@ geval een {\em dwenguino}. Hiervoor hebben we de volgende componenten nodig:
 
 \begin{itemize}
 \item een dwenguino,
-\item een computer met daarop de Arduino IDE software,
+\item een computer met daarop de Arduino IDE software waarin we ons programma kunnen schrijven,
 \item de dwengo-bibliotheken voor de Arduino IDE\footnote{\url{http://www.dwengo.org/install}}
 \item een liftkoker,
 \item een lift, die bij voorkeur niet kan ronddraaien terwijl ze verplaatst wordt,
@@ -56,16 +57,39 @@ De liftkoker en de lift zijn reeds gebouwd voor gebruik in onze Dojo, maar als j
 we een van onze motoren kunnen plaatsen, dan mag dat natuurlijk ook.
 
 We hebben dit project opgesplitst in een aantal deeltaken, die normaal van makkelijk of vrij eenvoudig naar redelijk
-moeilijk en vrij complex evolueren. Op dit moment zijn nog niet al die taken volledig uitgewerkt :)
+moeilijk en vrij ingewikkeld evolueren. Op dit moment zijn nog niet al die taken volledig uitgewerkt :)
+
+Vooraleer we kunnen starten, moeten we nog een aantal begrippen leren kennen.
+
+\begin{itemize}
+\item
+    Een {\em variabele} is een stukje geheugen dat we een naam geven om de gegevens die we erin stoppen te kunnen gebruiken.
+    Zoals de naam aangeeft, is deze inhoud niet vast, maar kan ze veranderen doordat we een nieuwe waarde aan de variabele toekennen.
+    In ons programma moeten we alle variabelen defini\"eren voor we ze kunnen gebruiken. Bij zo'n definitie hoort ook een {\em type}.
+\item
+    Een {\em type} vertelt de computer welke soort gegevens we in een variabele kunnen (en mogen) bijhouden. Een voorbeeld
+    van een type is bijvoorbeeld \texttt{int}, wat een verkorting is van {\em integer} hetgeen op zijn beurt dan weer
+    een Engels woord is voor geheel getal. Een ander type is \texttt{char*} wat we tyisch gebruiken om stukjes tekst op
+    te slaan\footnote{Eigenlijk is het een verwijzing (met een moeilijk woord een {\em pointer}) naar een stukje tekst, maar dat is
+    op dit moment niet zo belangrijk.} Een \texttt{char} stelt dan 1 enkel karakter of letterteken voor.
+\item
+    Een functie is een stukje code die we kunnen hergebruiken. Je kunt dit vergelijken met een blok in scratch dat je zelf
+    defini\"eert. Een functie bestaat uit twee onderdelen: de hoofding en het lichaam. De hoofding beschrijft de naam van
+    de functie, de argumenten (en hun types) die we aan de functie moeten meegeven en het type van de functiewaarde. Meestal,
+    maar niet altijd, zal een functie iets berekenen en het uitgerekende resultaat terug bezorgen aan de code die de functie
+    heeft opgeroepen. Maak je geen zorgen als dat nu nog een beetje ingewikkeld lijkt, hopelijk wordt het snel duidelijk
+    als we een voorbeeldje hebben gezien.
+\end{itemize}
 
 
 \section{Aankoppelen van de dweguino aan de motor en de lift verplaatsen}
 
-In deze eerste taak zullen we ervoor zorgen dat we de eenvoudigweg op en neer kunnen verplaatsen over een zelfde
-afstand. Hiervoor hebben we een {\em sketch} nodig die we schrijven in een gewone tekstgebaseerde programmeertaal (dus
-niet in Scratch). We kunnen deze sketch schrijven in o.a. de Arduino IDE.
+In deze eerste taak zullen we ervoor zorgen dat we de lift eenvoudig op en neer kunnen verplaatsen over een zelfde
+afstand. Hiervoor hebben we een programma of een {\em sketch} nodig die we schrijven in een gewone tekstgebaseerde
+programmeertaal (dus niet in Scratch). We kunnen deze sketch schrijven in onder andere de Arduino IDE die we op de
+computer hebben ge\"\i nstalleerd.
 
-Als je de IDE opent zie je onmiddellijk de standaard sketch:
+Als je de Arduino IDE start, zie je onmiddellijk de standaard sketch met daarin twee functies: \texttt{setup()} en \texttt{loop()}.
 
 \begin{lstlisting}[language=C++]
 void setup() {
@@ -79,11 +103,11 @@ void loop() {
 }
 \end{lstlisting}
 
-De code die nodig is om alles in te stellen, plaatsen we typisch in \texttt{setup()}, de code die telkens weer moet worden
+De code die nodig is om alles in te stellen, plaatsen we typisch in de \texttt{setup()} functie, de code die telkens weer moet worden
 uitgevoerd om bijvoorbeeld te reageren op gebeurtenissen zoals het indrukken van een knop, een sensor die iets opmerkt,
-\ldots, plaatsen we in \texttt{loop()}.
+\ldots, plaatsen we in de \texttt{loop()} functie.
 
-Variabelen die we in meerdere functies zullen gebruiken, plaatsen we buiten elke functie en zijn dan zogenaamde globale
+Variabelen die we in meerdere functies zullen gebruiken, plaatsen we buiten elke functiei. Dit zijn dan zogenaamde globale
 variabelen. Je kunt dit een beetje vergelijken met een variabele in Scratch die bruikbaar is door alle sprites.
 
 In onze eerste taak hebben we zo'n variabele nodig om de motor te kunnen gebruiken. Omdat de computer moet weten wat we
@@ -141,7 +165,7 @@ gedrukt.
 drukken, is het belangrijk dat de \texttt{loop()}-functie telkens wacht nadat een knop is ingedrukt. Daarvoor gebruik je
 de \texttt{delay()}-functie.
 
-\section{Bepalen van de beweging van de lift}
+\section{Bepalen van de bewegingssnelheid van de lift}
 
 Voor we de lift per verdieping kunnen verplaatsen, moeten we eerst achterhalen hoe ver de lift zich verplaatst voor
 een gegeven motorsnelheid en de tijd die we de motor laten draaien. Er zijn verschillende manieren om dit te bepalen,
@@ -155,6 +179,32 @@ afstand.
 
 Welke snelheden zou je kiezen als je zo snel mogelijk een idee wil hebben van het verband tussen de snelheid
 en de verplaatsing?
+
+Als je de metingen in de tabel plaatst kun je er ook een grafiek van maken. Kun je uit die grafiek afleiden welke
+snelheid en welke tijd de motor moet aan staan  vereist zijn om de lift \'e\'en verdieping te verplaatsen?
+Zorg ervoor dat de lift niet te snel moet bewegen.
+
+Hou deze grafiek ook bij, we zullen later de liftsnelheid een beetje laten varie\"eren zodat de lift sneller zal
+bewegen als er een verplaatsing over meer dan 1 verdieping nodig is.
+
+\subsection{Bepalen van het aantal omwentelingen van de motoras per seconde}
+
+Nu we weten hoe ver de lift verplaatst wordt voor een gegeven snelheid van de motor, kunnen we ook bepalen
+hoe vaak de motor een volledige omwenteling van de as maakt per seconde in functie van de snelheid die wij
+opgeven in ons programma. Hiervoor hebben we een beetje wiskunde nodig.
+
+De omtrek van de cirkel wordt gegeven door
+\begin{equation}
+\mathrm{omtrek} = 2 \times \mathrm{straal} \times \pi
+\end{equation}
+waarbij we $\pi$ kunnen benaderen door de waarde 3.1415269 (dat volstaat wel voor alle praktische berekeningen).
+
+Met de regel van 3 bepalen we makkelijk hoeveel omwentelingen de katrolas moet maken om de lift 1 cm te verplaatsen:
+\begin{align}
+& \mathrm{omtrek}\ \mathrm{cm} & \rightarrow 1 \mathrm{omwenteling}\\
+& 1\ \mathrm{cm}               & \rightarrow \frac{1}{\mathrm{omtrek}}\ \mathrm{omwentlingen}
+\end{align}
+
 
 
 \end{document}
