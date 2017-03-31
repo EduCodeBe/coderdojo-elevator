@@ -2,6 +2,7 @@
 
 \usepackage[a4paper,left=3cm,right=2cm,top=2.5cm,bottom=2.5cm]{geometry}
 \usepackage{amsmath}
+\usepackage{booktabs}
 
 
 \usepackage{hyperref}
@@ -16,6 +17,7 @@
     numberstyle=\small\color{mygray},
     keywordstyle=\color{blue},
     stringstyle=\color{green},
+    commentstyle=\color{mygray},
     numbersep=10pt,
 }
 
@@ -152,10 +154,10 @@ lift nog niet verplaatst door het tandwiel van de katrolas een beetje te verplaa
 \subsection{Verband tussen geleverde spanning en draaisnelheid van de motor}
 
 Als het dwengo bordje enkel via de USB-kabel met de computer verbonden is, dan is de elektrische spanning die aan de motor
-geleverd wordt, beperkt tot 2.5V (of -2.5V als de motor in de andere richting draait). Op welke snelheid moet je de motor
-instellen om dit te bereiken?
+geleverd wordt, beperkt tot 2.5V -- V staat voor Volt, de eenheid van spanning -- (of -2.5V als de motor in de andere
+richting draait). Op welke snelheid moet je de motor instellen om dit te bereiken?
 
-Als de dwenguino echter stroom krijgt van een sterkere spanningsbron, dan kan er een hogere elektrische spanning aan de
+Als de dwenguino echter stroom krijgt van een sterkere spanningsbron, kan er een hogere elektrische spanning aan de
 motor worden geleverd. Heb je een idee wat dit zou betekenen voor de snelheid waarmee de motor ronddraait?
 
 In dit experiment zullen we proberen nagaan wat de invloed is van de snelheid die we opgeven in onze sketch en de spanning
@@ -169,6 +171,9 @@ dat de spanning niet schommelt als een golf.
 Kies een aantal snelheden waarvan je denkt dat ze je nuttige informatie zullen opleveren en vul de tabel in. Als de tabel
 is ingevuld kunnen we een grafiek maken waarop we een duidelijk beeld kunnen krijgen van het invloed van de snelheid op
 de spanning en dus op de snelheid waarmee de motor draait.
+
+Extra vraag: wat is de minimale snelheid die je als argument moet opgeven opdat de motor effectief draait?
+
 
 \section{De lift bewegen met twee drukknoppen op de dwenguino}
 
@@ -206,7 +211,6 @@ Beweegt de lift trouwens even ver omhoog als omlaag als we de motor op
 dezelfde snelheid zetten en evenlang laten draaien? Hoe zou dat komen, denk je? Zouden we daar rekening mee moeten houden
 in ons programma, of maakt dat niet veel uit?
 
-
 Welke snelheden zou je kiezen als je zo snel mogelijk een idee wil hebben van het verband tussen de snelheid
 en de verplaatsing?
 
@@ -230,11 +234,56 @@ De omtrek van de cirkel wordt gegeven door
 waarbij we $\pi$ kunnen benaderen door de waarde 3.1415269 (dat volstaat wel voor alle praktische berekeningen).
 
 Met de regel van 3 bepalen we makkelijk hoeveel omwentelingen de katrolas moet maken om de lift 1 cm te verplaatsen:
-\begin{align}
-& \mathrm{omtrek}\ \mathrm{cm} & \rightarrow 1 \mathrm{omwenteling}\\
-& 1\ \mathrm{cm}               & \rightarrow \frac{1}{\mathrm{omtrek}}\ \mathrm{omwentlingen}
-\end{align}
+\begin{alignat}{4}
+\mathrm{omtrek}\ \mathrm{cm} & \rightarrow & 1\  & \mathrm{omwenteling}\\
+1\ \mathrm{cm}               & \rightarrow & \frac{1}{\mathrm{omtrek}}\  & \mathrm{omwentelingen}
+\end{alignat}
 
+Vervolgens moeten we uitrekenen hoeveel cm per seconde de lift bewoog voor onze gekozen snelheden.
 
+De volgende informatie die we kunnen gebruiken is het aantal tanden aan de twee tandwielen: (i) het tandwiel op de
+motoras en (ii) het tandwiel op de katrolas. De verhouding van deze twee waarden bepaalt hoe vaak de motoras zal
+omwentelen per omwenteling van de katrolas, als volgt:
+\begin{equation}
+v = \frac{\mathrm{aantal\ tanden\ op\ tandwiel\ katrolas}}{\mathrm{aantal\ tanden\ op\ tandwiel\ motoras}}\ = \frac{\hspace{2cm}}{} = \ldots
+\end{equation}
+
+Als we dit allemaal samen brengen, dan vinden we dat voor een verplaatsing van $k$ cm per seconde, onze motor
+\begin{equation}
+\frac{k}{\mathrm{omtrek}} \times v = \frac{k}{\mathrm{omtrek}} \times
+\frac{\mathrm{aantal\ tanden\ op\ tandwiel\ katrolas}}{\mathrm{aantal\ tanden\ op\ tandwiel\ motoras}}
+\end{equation}
+
+Als je deze formules invult in je spreadsheet, dan vind je het aantal omwentelingen per seconde voor de verschillende
+snelheden die we hebben.
+
+De werkelijke omwentelingssnelheden staan in Tabel~\ref{table:legomotorxl}.
+
+\begin{table}
+\begin{center}
+\begin{tabular}{lcc}
+    \toprule
+    Spanning & Omwentelingen (per minuut) & Omwentelingen (per seconde)\\
+    \midrule
+    4.5V & 43  & 0.72\\
+    7V   & 100 & 1.67\\
+    9V   & 146 & 2.43\\
+    12V  & 214 & 3.57\\
+    \bottomrule
+\end{tabular}
+\end{center}
+\caption{De opgegeven omwentelingssnelheden van de Lego XL Motor.}
+\label{table:legomotorxl}
+\end{table}
+
+Komen deze waarden overeen met wat je zelf hebt gemeten? Waarom zou dat het geval zijn?
+
+\section{Bewegen van de lift per verdieping}
+
+In de vorige taak hebben we bepaald hoe lang we de motor moeten laten draaien op een gegeven snelheid om de lift 1 cm te
+verplaatsen.
+
+Zorg er nu voor dat je programma de lift (ongeveer) \'e\'en verdieping kan verplaatsen als je op een van de
+drukknoppen drukt. Hou er rekening mee dat de snelheid omhoog en de snelheid omlaag verschillend kunnen zijn.
 
 \end{document}
