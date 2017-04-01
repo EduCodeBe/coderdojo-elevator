@@ -14,7 +14,8 @@ DCMotor dcMotor1(MOTOR_1_0, MOTOR_1_1);
 bool is_button_pressed, button_pressed;
 
 // We stellen de bewegingssnelheid in als constante
-int LIFT_SPEED = 100;
+int LIFT_SPEED = 255;
+int LIFT_TIME = 200;
 
 void setup() {
   initDwenguino();
@@ -25,13 +26,13 @@ void setup() {
 
 void move_lift_up() {
   dcMotor1.setSpeed(LIFT_SPEED);
-  delay(2500);
+  delay(LIFT_TIME);
   dcMotor1.setSpeed(0);
 }
 
 void move_lift_down() {
   dcMotor1.setSpeed(-LIFT_SPEED);
-  delay(2500);
+  delay(LIFT_TIME);
   dcMotor1.setSpeed(0);
 }
 
