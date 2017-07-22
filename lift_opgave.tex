@@ -40,6 +40,7 @@
 \author{CoderDojo's Bredene - Oostende}
 \maketitle
 
+//-------------------------------------------------------------------------------------------
 \section{Introductie}
 
 We zullen in dit project een lift bouwen die we kunnen aansturen met behulp van een elektronica-bordje, in dit
@@ -87,6 +88,7 @@ Vooraleer we kunnen starten, moeten we nog een aantal begrippen leren kennen.
 \end{itemize}
 
 
+//-------------------------------------------------------------------------------------------
 \section{Aankoppelen van de dweguino aan de motor en de lift verplaatsen}
 
 In deze eerste taak zullen we ervoor zorgen dat we de lift eenvoudig op en neer kunnen verplaatsen over een zelfde
@@ -175,6 +177,7 @@ de spanning en dus op de snelheid waarmee de motor draait.
 Extra vraag: wat is de minimale snelheid die je als argument moet opgeven opdat de motor effectief draait?
 
 
+//-------------------------------------------------------------------------------------------
 \section{De lift bewegen met twee drukknoppen op de dwenguino}
 
 Nu we weten hoe we de motor kunnen bewegen in beide richtingen, is het tijd om de volgende stap te zetten. We zullen
@@ -199,6 +202,7 @@ gedrukt.
 drukken, is het belangrijk dat de \texttt{loop()}-functie telkens wacht nadat een knop is ingedrukt. Daarvoor gebruik je
 de \texttt{delay()}-functie.
 
+//-------------------------------------------------------------------------------------------
 \section{Bepalen van de bewegingssnelheid van de lift}
 
 Voor we de lift per verdieping kunnen verplaatsen, moeten we eerst achterhalen hoe ver de lift zich verplaatst voor
@@ -278,12 +282,60 @@ De werkelijke omwentelingssnelheden staan in Tabel~\ref{table:legomotorxl}.
 
 Komen deze waarden overeen met wat je zelf hebt gemeten? Waarom zou dat het geval zijn?
 
-\section{Bewegen van de lift per verdieping}
+
+//-------------------------------------------------------------------------------------------
+\section{Bewegen van de lift naar de verschillende verdiepingen}
 
 In de vorige taak hebben we bepaald hoe lang we de motor moeten laten draaien op een gegeven snelheid om de lift 1 cm te
 verplaatsen.
 
 Zorg er nu voor dat je programma de lift (ongeveer) \'e\'en verdieping kan verplaatsen als je op een van de
-drukknoppen drukt. Hou er rekening mee dat de snelheid omhoog en de snelheid omlaag verschillend kunnen zijn.
+drukknoppen drukt. Hou er rekening mee dat de snelheid omhoog en de snelheid omlaag licht verschillend kunnen zijn.
+
+\subsection{Optioneel: beperk de lift tot de verdiepingen tussen 0 en 4}
+
+Het doel hiervan is ervoor te zorgen dat de draad niet van de katrol raakt. Dit probleem kan ook worden
+opgelost door verdiepingen toe te kennen aan elke van de knoppen, maar dit is ook wel een fijne uitdaging.
+
+
+\subsection{Schrijven van hulp-functies}
+
+Je kunt twee functies schrijven: (1) \texttt{void verdieping\_omhoog() \{ /*
+\ldots */\}} en (2) \texttt{void verdieping\_omlaag() \{ \* \ldots *\ \}}. Deze
+functies zullen we dan oproepen in de \texttt{loop} functie om de lift te bewegen.
+
+\subsection{Bedienen van de verschillende drukknoppen}
+
+Zoals eerder vermeld, staan er op de Dwenguino 5 drukknoppen, die we als volgt zullen gebruiken:
+
+\begin{itemize}
+        \item \texttt{SW\_S}: de onderste knop (zuid): verdieping 0 (gelijkvloers)
+        \item \texttt{SW\_E}: de rechtse knop (oost): verdieping 1
+        \item \texttt{SW\_N}: de bovenste knop (noord): verdieping 2
+        \item \texttt{SW\_W}: de linkse knop (west): verdieping 3
+        \item \texttt{SW\_C}: de centrale knop (zuid): verdieping 4
+\end{itemize}
+
+Je zult moeten bijhouden op welke verdieping de lift zich bevindt. Definieer hiervoor bijvoorbeeld een 
+nieuwe variable \texttt{int huidige\_verdieping = 0;}. Je moet de waarde van deze variabele aanpassen telkens
+de lift zijn nieuwe bestemming heeft bereikt.
+
+Gebruik hier ook de \texttt{verdieping\_omhoog} en \texttt{verdieping\_omlaag} functies die je
+eerder hebt gedefinieerd.
+
+
+//-------------------------------------------------------------------------------------------
+\section{Gebruik van sensoren om de positie van de lift te detecteren}
+
+De lift bewegen door de motor een bepaalde tijd te laten draaien is ok, en we slagen er wel in om de juiste verdieping min of meer te bereiken,
+maar bij elke beweging neemt de fout op de positie toe. Het zou beter zijn niet af te gaan op de metingen die we hebben gedaan, want het
+sleutelgegeven -- het aantal rotaties in elke seconde -- hebben we niet op de meest nauwkeurige manier gemeten.
+
+We kunnen echter gebruik maken van de sensorpoorten van de dwenguino en aan elke poort de stroom te meten die niet door een 
+fotosensor wordt tegengehouden. Hiervoor hebben we echter een nieuwe toren nodig, waarbij we op elk verdiep een led-lichtje aan de
+ene kant plaatsen en een sensor aan de andere kant. 
+
+TBC.
+
 
 \end{document}
